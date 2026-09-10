@@ -217,7 +217,7 @@ local function setEggHidden(ownerIdStr, eggUid, hide, eggTargetPos)
             end
         end
 
-        -- 3. Quét và tắt toàn bộ ProximityPrompt trong bán kính 14 studs của vị trí trứng (tổ trứng, smartpromptpart...)
+        -- 3. Quét và tắt toàn bộ ProximityPrompt trong bán kính 3 studs của vị trí trứng (tổ trứng, smartpromptpart...)
         local searchPos = targetPos or (eggOriginalPositions[modelKey])
         if searchPos then
             pcall(function()
@@ -229,7 +229,7 @@ local function setEggHidden(ownerIdStr, eggUid, hide, eggTargetPos)
                         elseif prompt.Parent:IsA("Attachment") then
                             pPos = prompt.Parent.WorldPosition
                         end
-                        if pPos and (pPos - searchPos).Magnitude <= 14 then
+                        if pPos and (pPos - searchPos).Magnitude <= 3 then
                             if originalPrompts[prompt] == nil then
                                 originalPrompts[prompt] = {
                                     Enabled = prompt.Enabled,
@@ -321,7 +321,7 @@ pcall(function()
             for mKey, isHidden in pairs(hiddenEggKeys) do
                 if isHidden then
                     local origPos = eggOriginalPositions[mKey]
-                    if origPos and (pPos - origPos).Magnitude <= 14 then
+                    if origPos and (pPos - origPos).Magnitude <= 3 then
                         prompt.Enabled = false
                         prompt.MaxActivationDistance = 0
                         break
